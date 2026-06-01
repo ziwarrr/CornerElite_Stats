@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZI Corner Pro — Strategy Elite</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#060d1a;--navy2:#0a1628;--navy3:#0f2040;
+  --gold:#c9a227;--gold-l:#e8c96e;--gold-b:rgba(201,162,39,0.2);
+  --white:#f8f4ed;--white2:rgba(248,244,237,0.6);--white3:rgba(248,244,237,0.35);
+  --green:#2ecc71;--red:#e74c3c;--orange:#e67e22;--yellow:#f1c40f;--blue:#5dade2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--navy);color:var(--white);font-family:'Raleway',sans-serif;font-weight:300;overflow-x:hidden}
+
+/* GRID BG */
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(201,162,39,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(201,162,39,0.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;background:rgba(6,13,26,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--gold-b)}
+.nav-logo{display:flex;align-items:center;gap:0.75rem}
+.nav-logo img{width:36px;height:36px;border-radius:50%;border:1px solid var(--gold-b)}
+.nav-brand{font-family:'Cinzel',serif;font-size:0.95rem;font-weight:700;color:var(--gold-l);letter-spacing:2px}
+.nav-links{display:flex;align-items:center;gap:1.5rem}
+.nav-link{font-size:11px;letter-spacing:2px;color:var(--white2);text-decoration:none;text-transform:uppercase;transition:color 0.2s}
+.nav-link:hover{color:var(--gold)}
+.nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:0.45rem 1.1rem;font-size:11px;letter-spacing:2px;font-family:'Raleway',sans-serif;cursor:pointer;text-decoration:none;text-transform:uppercase;transition:all 0.2s}
+.nav-cta:hover{background:rgba(201,162,39,0.1);color:var(--gold-l)}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;overflow:hidden}
+.hero-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(201,162,39,0.08) 0%,transparent 70%);pointer-events:none}
+.hero-glow2{position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(201,162,39,0.06) 0%,transparent 70%);pointer-events:none}
+.hero-logo{width:130px;height:130px;border-radius:50%;border:2px solid var(--gold-b);box-shadow:0 0 60px rgba(201,162,39,0.15);margin-bottom:2rem;position:relative;z-index:1}
+.hero-eyebrow{font-size:10px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;position:relative;z-index:1}
+.hero-title{font-family:'Cinzel',serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:900;line-height:1.1;margin-bottom:1rem;position:relative;z-index:1}
+.hero-title span{background:linear-gradient(135deg,var(--gold-l),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(1rem,2vw,1.25rem);color:var(--white2);font-style:italic;font-family:'Raleway',serif;max-width:600px;margin:0 auto 2.5rem;position:relative;z-index:1;line-height:1.7}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;margin-bottom:3rem}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-l));color:var(--navy);padding:0.85rem 2rem;font-size:12px;letter-spacing:3px;font-family:'Cinzel',serif;font-weight:700;text-decoration:none;text-transform:uppercase;transition:all 0.2s;border:none;cursor:pointer}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,162,39,0.3)}
+.btn-secondary{background:transparent;border:1px solid var(--gold-b);color:var(--white2);padding:0.85rem 2rem;font-size:12px;letter-spacing:3px;font-family:'Cinzel',serif;text-decoration:none;text-transform:uppercase;transition:all 0.2s}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold)}
+.hero-metrics{display:flex;gap:3rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;padding-top:2rem;border-top:1px solid var(--gold-b)}
+.hero-metric-val{font-family:'Cinzel',serif;font-size:2rem;font-weight:700;color:var(--gold-l);display:block;line-height:1}
+.hero-metric-label{font-size:9px;letter-spacing:3px;color:var(--white3);text-transform:uppercase;display:block;margin-top:0.3rem}
+.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:3px;color:var(--white3);text-transform:uppercase;animation:bob 2s infinite}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+/* SECTIONS */
+section{position:relative;z-index:1;padding:5rem 2rem}
+.container{max-width:1100px;margin:0 auto}
+.section-label{font-size:10px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;text-align:center;margin-bottom:0.75rem}
+.section-title{font-family:'Cinzel',serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:700;text-align:center;margin-bottom:1rem;line-height:1.3}
+.section-sub{font-size:13px;color:var(--white2);text-align:center;max-width:600px;margin:0 auto 3rem;line-height:1.8}
+.gold-line{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:1rem auto 2.5rem}
+
+/* FEATURES */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.feature-card{background:rgba(255,255,255,0.02);border:1px solid var(--gold-b);padding:2rem;position:relative;transition:border-color 0.2s}
+.feature-card:hover{border-color:rgba(201,162,39,0.5)}
+.feature-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--gold),transparent)}
+.feature-icon{font-size:2rem;margin-bottom:1rem}
+.feature-title{font-family:'Cinzel',serif;font-size:0.95rem;color:var(--gold-l);margin-bottom:0.75rem;letter-spacing:1px}
+.feature-desc{font-size:12px;color:var(--white2);line-height:1.8}
+
+/* WINDOWS */
+.windows-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.window-card{border:1px solid var(--gold-b);overflow:hidden}
+.window-head{padding:1rem;text-align:center}
+.window-time{font-family:'Cinzel',serif;font-size:1.3rem;font-weight:700;display:block;margin-bottom:0.25rem}
+.window-name{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--white2)}
+.window-body{background:rgba(255,255,255,0.02);padding:1rem}
+.window-desc{font-size:11px;color:var(--white2);line-height:1.7;margin-bottom:1rem}
+.window-market{font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px}
+.window-market span{display:block;font-size:9px;color:var(--white3);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.25rem}
+
+/* LEVELS */
+.levels-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.level-card{padding:2rem;border:1px solid;text-align:center;position:relative;overflow:hidden}
+.level-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.level-dots{font-size:1.1rem;letter-spacing:2px;margin-bottom:1rem;display:block}
+.level-score{font-family:'Cinzel',serif;font-size:2.5rem;font-weight:700;display:block;line-height:1;margin-bottom:0.5rem}
+.level-name{font-size:10px;letter-spacing:4px;text-transform:uppercase;margin-bottom:1.25rem;display:block}
+.level-desc{font-size:12px;color:var(--white2);line-height:1.8;margin-bottom:1.25rem}
+.level-market{font-size:11px;letter-spacing:1px;font-weight:600}
+
+/* TELEGRAM MOCK */
+.tg-section{background:rgba(10,22,40,0.8);border-top:1px solid var(--gold-b);border-bottom:1px solid var(--gold-b)}
+.tg-wrap{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.tg-text .section-title{text-align:left}
+.tg-text .section-sub{text-align:left;margin:0 0 2rem}
+.tg-text .gold-line{margin:1rem 0 2.5rem}
+.tg-phone{background:#1a2d45;border:1px solid rgba(93,173,226,0.3);max-width:320px;margin:0 auto}
+.tg-topbar{background:#1a2433;padding:0.6rem 1rem;display:flex;align-items:center;gap:0.5rem;border-bottom:1px solid rgba(93,173,226,0.2)}
+.tg-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-l));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--navy);font-family:'Cinzel',serif}
+.tg-name{font-size:12px;color:var(--white);font-weight:600}
+.tg-status{font-size:10px;color:var(--green)}
+.tg-body{background:#1e3a5f;padding:1.25rem;font-family:'Courier New',monospace;font-size:11px;line-height:1.7;color:var(--white)}
+.tg-time{text-align:right;font-size:10px;color:var(--white3);padding:0.5rem 1rem;background:#1a2433}
+.tg-gold{color:var(--gold-l)}
+.tg-green{color:var(--green)}
+.tg-blue{color:var(--blue)}
+.tg-white2{color:var(--white2)}
+
+/* LIVE STATS */
+.live-stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--gold-b)}
+.live-stat{background:var(--navy2);padding:2rem 1rem;text-align:center;position:relative}
+.live-stat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.live-stat-val{font-family:'Cinzel',serif;font-size:2.5rem;font-weight:700;color:var(--gold-l);display:block;margin-bottom:0.5rem}
+.live-stat-val.green{color:var(--green)}
+.live-stat-label{font-size:9px;letter-spacing:3px;color:var(--white3);text-transform:uppercase}
+.live-note{text-align:center;font-size:11px;color:var(--white3);margin-top:1.5rem;letter-spacing:1px}
+
+/* CTA SECTION */
+.cta-section{text-align:center;padding:6rem 2rem;position:relative;overflow:hidden}
+.cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(201,162,39,0.06) 0%,transparent 70%);pointer-events:none}
+.cta-title{font-family:'Cinzel',serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:700;margin-bottom:1rem;position:relative;z-index:1}
+.cta-sub{font-size:14px;color:var(--white2);max-width:500px;margin:0 auto 2.5rem;line-height:1.8;position:relative;z-index:1;font-style:italic}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+
+
+/* MEMBERSHIP */
+.membership-section{padding:5rem 2rem;background:rgba(10,22,40,0.6)}
+.plans-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
+.plan-card{background:var(--navy2);border:1px solid var(--gold-b);padding:1.5rem;position:relative;transition:border-color 0.2s}
+.plan-card:hover{border-color:rgba(201,162,39,0.5)}
+.plan-card.featured{border-color:var(--gold);background:rgba(201,162,39,0.06)}
+.plan-card.featured::before{content:'MOST POPULAR';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-size:9px;font-weight:700;padding:3px 12px;letter-spacing:2px;white-space:nowrap;font-family:'Cinzel',serif}
+.plan-icon{font-size:2rem;margin-bottom:0.75rem}
+.plan-name{font-family:'Cinzel',serif;font-size:13px;color:var(--gold-l);letter-spacing:1px;margin-bottom:0.5rem}
+.plan-price{font-family:'Cinzel',serif;font-size:2rem;font-weight:700;color:var(--white);margin-bottom:0.25rem}
+.plan-price span{font-size:12px;color:var(--white3);font-family:'Raleway',sans-serif;font-weight:300}
+.plan-features{list-style:none;margin:1rem 0 1.5rem;padding:0}
+.plan-features li{font-size:12px;color:var(--white2);padding:5px 0;border-bottom:0.5px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:0.5rem}
+.plan-features li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0}
+.plan-features li.missing{color:var(--white3)}
+.plan-features li.missing::before{content:'–';color:var(--white3)}
+.plan-btn{display:block;text-align:center;padding:0.6rem 1rem;font-size:11px;letter-spacing:2px;font-family:'Cinzel',serif;text-decoration:none;text-transform:uppercase;transition:all 0.2s;border:1px solid var(--gold-b);color:var(--white2)}
+.plan-btn:hover{border-color:var(--gold);color:var(--gold)}
+.plan-btn.featured-btn{background:linear-gradient(135deg,var(--gold),var(--gold-l));color:var(--navy);border:none;font-weight:700}
+.plan-btn.featured-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(201,162,39,0.3)}
+.skrill-note{text-align:center;font-size:12px;color:var(--white3);margin-top:1rem}
+.skrill-note strong{color:var(--white2)}
+
+/* PERSONAL TIPS */
+.tips-card{background:rgba(201,162,39,0.05);border:1px solid var(--gold-b);padding:2rem;margin-bottom:2rem;position:relative}
+.tips-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--gold),transparent)}
+
+/* CONTACT */
+.contact-section{padding:5rem 2rem}
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:900px;margin:0 auto}
+.contact-form{display:flex;flex-direction:column;gap:1rem}
+.form-input{background:rgba(255,255,255,0.03);border:1px solid var(--gold-b);padding:0.75rem 1rem;color:var(--white);font-family:'Raleway',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;width:100%}
+.form-input:focus{border-color:var(--gold)}
+.form-input::placeholder{color:var(--white3)}
+.form-select{background:var(--navy2);border:1px solid var(--gold-b);padding:0.75rem 1rem;color:var(--white);font-family:'Raleway',sans-serif;font-size:13px;outline:none;width:100%}
+@media(max-width:900px){.plans-grid{grid-template-columns:repeat(2,1fr)}.contact-wrap{grid-template-columns:1fr}}
+
+/* FOOTER */
+footer{border-top:1px solid var(--gold-b);padding:2rem;text-align:center}
+.footer-logo{font-family:'Cinzel',serif;font-size:1rem;color:var(--gold);letter-spacing:4px;margin-bottom:0.5rem}
+.footer-sub{font-size:10px;letter-spacing:3px;color:var(--white3);text-transform:uppercase;margin-bottom:1rem}
+.footer-disc{font-size:10px;color:var(--white3);max-width:700px;margin:0 auto;line-height:1.7}
+
+@media(max-width:900px){
+  .features-grid{grid-template-columns:1fr}
+  .windows-grid{grid-template-columns:repeat(2,1fr)}
+  .levels-wrap{grid-template-columns:1fr}
+  .tg-wrap{grid-template-columns:1fr}
+  .live-stats-grid{grid-template-columns:repeat(2,1fr)}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="logo.png" alt="ZI Corner Pro" onerror="this.style.display='none'">
+    <span class="nav-brand">ZI CORNER PRO</span>
+  </div>
+  <div class="nav-links">
+    <a href="#how" class="nav-link">How It Works</a>
+    <a href="#windows" class="nav-link">Windows</a>
+    <a href="#alerts" class="nav-link">Alerts</a>
+    <a href="#performance" class="nav-link">Performance</a>
+    <a href="#membership" class="nav-link">Membership</a>
+    <a href="#contact" class="nav-link">Contact</a>
+  </div>
+  <a href="dashboard.html" class="nav-cta">Live Dashboard →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <img src="logo.png" class="hero-logo" alt="ZI Corner Pro" onerror="this.style.display='none'">
+  <div class="hero-eyebrow">⚑ Strategy Elite · Real-Time Intelligence</div>
+  <h1 class="hero-title">The most sophisticated<br><span>corner analysis system</span><br>on the market.</h1>
+  <p class="hero-sub">ZI Corner Pro monitors 87+ elite leagues in real time, identifies genuine pressure momentum, and delivers surgical alerts directly to your Telegram — exactly when it matters.</p>
+  <div class="hero-btns">
+    <a href="dashboard.html" class="btn-primary">View Live Performance</a>
+    <a href="whitepaper.pdf" target="_blank" class="btn-secondary">⬇ Download Whitepaper</a>
+  </div>
+  <div class="hero-metrics">
+    <div><span class="hero-metric-val">87+</span><span class="hero-metric-label">Elite Leagues</span></div>
+    <div><span class="hero-metric-val">4</span><span class="hero-metric-label">Precision Windows</span></div>
+    <div><span class="hero-metric-val">15s</span><span class="hero-metric-label">Scan Cycle</span></div>
+    <div><span class="hero-metric-val">10</span><span class="hero-metric-label">Filter Layers</span></div>
+    <div><span class="hero-metric-val">0–10</span><span class="hero-metric-label">Confidence Score</span></div>
+  </div>
+  <div class="scroll-hint">↓ scroll</div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how" style="background:rgba(10,22,40,0.5)">
+  <div class="container">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-title">Intelligence built on data,<br>not intuition.</h2>
+    <div class="gold-line"></div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📸</div>
+        <div class="feature-title">Proprietary Snapshot System</div>
+        <div class="feature-desc">Statistical photographs at strategic minutes create precise reference points. The system measures real momentum — not misleading cumulative totals. Every delta is calculated against a verified baseline.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔥</div>
+        <div class="feature-title">Exclusive Pressure Index</div>
+        <div class="feature-desc">A proprietary composite formula weighs each type of offensive action by its actual impact on corner production. Shots inside the box, shots on goal, blocked attempts — all combined into a single intensity score.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡</div>
+        <div class="feature-title">10-Layer Filter Cascade</div>
+        <div class="feature-desc">Every potential alert passes through a rigorous sequence of filters before being sent — elite league verification, favourite identification, pressure thresholds, possession dynamics, adversary posture. Zero noise.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <div class="feature-title">Confidence Score 0–10</div>
+        <div class="feature-desc">Eleven independent criteria evaluated simultaneously. The system is calibrated so that only genuinely exceptional situations reach the highest scores — making every alert a signal with real meaning.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <div class="feature-title">Automatic Follow-Up</div>
+        <div class="feature-desc">A reference photo is taken 2.5 minutes after each alert. When the match ends, WIN/LOSS is calculated automatically against a real market baseline — no manual tracking, no ambiguity.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📈</div>
+        <div class="feature-title">Verified Performance History</div>
+        <div class="feature-desc">Every alert and result is logged automatically. Daily summary at 23:59, instant /stats command on Telegram, win rate by window and confidence level. Performance you can audit.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WINDOWS -->
+<section id="windows">
+  <div class="container">
+    <div class="section-label">Precision Windows</div>
+    <h2 class="section-title">Four moments. Four strategies.<br>One system.</h2>
+    <p class="section-sub">Each window was identified and calibrated to capture a distinct pattern of mounting pressure — where the statistical probability of corner production is at its highest.</p>
+    <div class="gold-line"></div>
+    <div class="windows-grid">
+      <div class="window-card">
+        <div class="window-head" style="background:rgba(201,162,39,0.12)">
+          <span class="window-time" style="color:var(--gold-l)">26' — 30'</span>
+          <span class="window-name">⚡ HT Attack</span>
+        </div>
+        <div class="window-body">
+          <div class="window-desc">End-of-first-half pressure. The favourite hasn't scored and intensifies its attack before the break — a pattern rich in corners and set-pieces.</div>
+          <div class="window-market"><span>Target Market</span>Over +2 Corners</div>
+        </div>
+      </div>
+      <div class="window-card">
+        <div class="window-head" style="background:rgba(93,173,226,0.12)">
+          <span class="window-time" style="color:var(--blue)">55' — 58'</span>
+          <span class="window-name">🦈 Shark Attack</span>
+        </div>
+        <div class="window-body">
+          <div class="window-desc">Second-half explosion. Substitutions, tactical adjustments and renewed motivation create one of the highest corner-density windows in football.</div>
+          <div class="window-market" style="color:var(--blue)"><span>Target Market</span>Over +4 Corners</div>
+        </div>
+      </div>
+      <div class="window-card">
+        <div class="window-head" style="background:rgba(230,126,34,0.12)">
+          <span class="window-time" style="color:var(--orange)">65' — 69'</span>
+          <span class="window-name">🔥 Mid Pressure</span>
+        </div>
+        <div class="window-body">
+          <div class="window-desc">Growing pressure and tactical urgency. The favourite increases pace and offensive quality — creating ideal conditions for corner accumulation.</div>
+          <div class="window-market" style="color:var(--orange)"><span>Target Market</span>Over +3 Corners</div>
+        </div>
+      </div>
+      <div class="window-card">
+        <div class="window-head" style="background:rgba(231,76,60,0.12)">
+          <span class="window-time" style="color:var(--red)">77' — 81'</span>
+          <span class="window-name">💥 Final Push</span>
+        </div>
+        <div class="window-body">
+          <div class="window-desc">Total desperation. The favourite attacks with maximum force as the clock runs — producing the most intense pressure and highest corners-per-minute of any window.</div>
+          <div class="window-market" style="color:var(--red)"><span>Target Market</span>Over +2 Corners</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALERT LEVELS -->
+<section style="background:rgba(10,22,40,0.5)">
+  <div class="container">
+    <div class="section-label">Confidence Levels</div>
+    <h2 class="section-title">Three levels of pressure.<br>Three tiers of opportunity.</h2>
+    <p class="section-sub">The confidence score determines not just the alert intensity, but also the recommended market. The higher the score, the broader the opportunity.</p>
+    <div class="gold-line"></div>
+    <div class="levels-wrap">
+      <div class="level-card" style="border-color:rgba(241,196,15,0.3);background:rgba(241,196,15,0.04)">
+        <div class="level-card" style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--yellow)"></div>
+        <span class="level-dots">🟢🟢🟢🟢🟢🟢🟢🟢⚪⚪</span>
+        <span class="level-score" style="color:var(--yellow)">7.0 — 7.9</span>
+        <span class="level-name" style="color:var(--yellow)">🟡 Strong Pressure</span>
+        <div class="level-desc">Solid, consistent pressure with multiple indicators aligned. A quality signal with clear offensive dominance and genuine momentum.</div>
+        <div class="level-market" style="color:var(--yellow)">Over Corners</div>
+      </div>
+      <div class="level-card" style="border-color:rgba(230,126,34,0.3);background:rgba(230,126,34,0.04)">
+        <div class="level-card" style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--orange)"></div>
+        <span class="level-dots">🟢🟢🟢🟢🟢🟢🟢🟢🟢⚪</span>
+        <span class="level-score" style="color:var(--orange)">8.0 — 8.9</span>
+        <span class="level-name" style="color:var(--orange)">🟠 Elite Pressure</span>
+        <div class="level-desc">Exceptional pressure with elevated intensity across nearly all criteria. A strong signal that rarely fails to produce additional corners.</div>
+        <div class="level-market" style="color:var(--orange)">Over Corners</div>
+      </div>
+      <div class="level-card" style="border-color:rgba(231,76,60,0.3);background:rgba(231,76,60,0.04)">
+        <div class="level-card" style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--red)"></div>
+        <span class="level-dots">🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢</span>
+        <span class="level-score" style="color:var(--red)">≥ 9.0</span>
+        <span class="level-name" style="color:var(--red)">🔴 Nuclear Pressure</span>
+        <div class="level-desc">A rare event of absolute pressure. All criteria point in the same direction at maximum intensity. Extended markets recommended.</div>
+        <div class="level-market" style="color:var(--red)">Over / Race / Handicap</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TELEGRAM ALERT EXAMPLE -->
+<section id="alerts" class="tg-section">
+  <div class="container">
+    <div class="tg-wrap">
+      <div class="tg-text">
+        <div class="section-label">Real Alert</div>
+        <h2 class="section-title">Everything you need.<br>Nothing you don't.</h2>
+        <div class="gold-line"></div>
+        <p class="section-sub">Each alert arrives directly on Telegram with full context — match, minute, confidence score, momentum metrics, possession dynamics and recommended market. One glance, one decision.</p>
+        <a href="dashboard.html" class="btn-primary" style="display:inline-block">See All Results →</a>
+      </div>
+      <div>
+        <div class="tg-phone">
+          <div class="tg-topbar">
+            <div class="tg-avatar">ZI</div>
+            <div>
+              <div class="tg-name">ZI Corner Pro</div>
+              <div class="tg-status">● online</div>
+            </div>
+          </div>
+          <div class="tg-body">
+            <span class="tg-gold">🚨 🟠 ELITE PRESSURE</span><br>
+            🟢🟢🟢🟢🟢🟢🟢🟢🟢⚪ <span class="tg-gold">(8.5/10)</span><br>
+            <br>
+            Man City 1-1 Everton<br>
+            <span class="tg-white2">67' | Odds: @1.45 | @7.20</span><br>
+            <span class="tg-white2">━━━━━━━━━━━━</span><br>
+            <span class="tg-gold">MOMENTUM</span><br>
+            RM:+7 | QU:+8 | CN:+2<br>
+            BL:+2 | SUF:+21.5<br>
+            Área:+4 | SOG:+3<br>
+            RM/min: <span class="tg-gold">0.58</span><br>
+            <br>
+            <span class="tg-gold">MICRO</span><br>
+            RM:+3 | BL:+1<br>
+            Área:+2 | SOG:+1<br>
+            <span class="tg-white2">────────────</span><br>
+            <span class="tg-gold">PRESSURE</span><br>
+            Possession: 64% (+3%)<br>
+            Corners: 7-2 | Area: 9<br>
+            <span class="tg-white2">────────────</span><br>
+            <span class="tg-green">🎯 OVER CORNERS</span>
+          </div>
+          <div class="tg-time">21:34 ✓✓</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE PERFORMANCE -->
+<section id="performance">
+  <div class="container">
+    <div class="section-label">Live Performance</div>
+    <h2 class="section-title">Results you can verify.<br>Data you can trust.</h2>
+    <p class="section-sub">Performance tracked automatically. Every alert logged. Every result calculated without manual intervention. No cherry-picking. No ambiguity.</p>
+    <div class="gold-line"></div>
+    <div class="live-stats-grid">
+      <div class="live-stat"><span class="live-stat-val" id="ls-total">—</span><span class="live-stat-label">Total Alerts</span></div>
+      <div class="live-stat"><span class="live-stat-val green" id="ls-rate">—</span><span class="live-stat-label">Win Rate</span></div>
+      <div class="live-stat"><span class="live-stat-val" id="ls-cantos">—</span><span class="live-stat-label">Avg Corners After Alert</span></div>
+      <div class="live-stat"><span class="live-stat-val" id="ls-score">—</span><span class="live-stat-label">Avg Score (WIN)</span></div>
+    </div>
+    <p class="live-note" id="ls-updated">Loading live data...</p>
+  </div>
+</section>
+
+
+<!-- PERSONAL TIPS HIGHLIGHT -->
+<section style="padding:3rem 2rem 0">
+  <div class="container">
+    <div class="tips-card">
+      <div style="display:flex;align-items:flex-start;gap:2rem;flex-wrap:wrap">
+        <div style="flex:1;min-width:280px">
+          <div class="section-label" style="text-align:left;margin-bottom:0.5rem">Elite Pack — Exclusive Feature</div>
+          <h3 style="font-family:'Cinzel',serif;font-size:1.4rem;color:var(--gold-l);margin-bottom:1rem">Personal Tips by the Creator</h3>
+          <p style="font-size:13px;color:var(--white2);line-height:1.8;margin-bottom:1rem">
+            Beyond the automated alerts, the <strong style="color:var(--white)">Elite Pack</strong> includes personal tips delivered directly by the system's creator — an experienced trader who watches live streams of selected matches and combines real-time visual analysis with years of market expertise.
+          </p>
+          <p style="font-size:13px;color:var(--white2);line-height:1.8">
+            These are not automated signals. They are human decisions — informed by watching the game live, reading the flow of play, and identifying value that no algorithm can fully capture. Exclusive to Elite Pack subscribers only.
+          </p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:0.75rem;min-width:220px">
+          <div style="background:rgba(201,162,39,0.08);border:1px solid var(--gold-b);padding:1rem">
+            <div style="font-size:10px;letter-spacing:2px;color:var(--gold);margin-bottom:0.4rem">LIVE STREAM ANALYSIS</div>
+            <div style="font-size:12px;color:var(--white2)">Watching the game in real time — not just stats</div>
+          </div>
+          <div style="background:rgba(201,162,39,0.08);border:1px solid var(--gold-b);padding:1rem">
+            <div style="font-size:10px;letter-spacing:2px;color:var(--gold);margin-bottom:0.4rem">MARKET EXPERTISE</div>
+            <div style="font-size:12px;color:var(--white2)">Years of experience in live corner markets</div>
+          </div>
+          <div style="background:rgba(201,162,39,0.08);border:1px solid var(--gold-b);padding:1rem">
+            <div style="font-size:10px;letter-spacing:2px;color:var(--gold);margin-bottom:0.4rem">ELITE PACK ONLY</div>
+            <div style="font-size:12px;color:var(--white2)">Exclusive — not available in any other plan</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBERSHIP -->
+<section class="membership-section" id="membership">
+  <div class="container">
+    <div class="section-label">Membership</div>
+    <h2 class="section-title">Choose Your Plan</h2>
+    <p class="section-sub">All plans include access to our private Telegram channel. Cancel anytime.</p>
+    <div class="gold-line"></div>
+
+    <div class="plans-grid">
+
+      <!-- Corners Only -->
+      <div class="plan-card">
+        <div class="plan-icon">⚑</div>
+        <div class="plan-name">Corners Only</div>
+        <div class="plan-price">€XX <span>/ month</span></div>
+        <ul class="plan-features">
+          <li>ZI Corner Pro bot alerts</li>
+          <li>4 precision windows</li>
+          <li>Confidence score 0–10</li>
+          <li>Automatic follow-up</li>
+          <li class="missing">Goals pre-live alerts</li>
+          <li class="missing">Personal tips</li>
+        </ul>
+        <a href="https://t.me/great_ziii" target="_blank" class="plan-btn">Get Access</a>
+      </div>
+
+      <!-- Goals Only -->
+      <div class="plan-card">
+        <div class="plan-icon">⚽</div>
+        <div class="plan-name">Goals Only</div>
+        <div class="plan-price">€XX <span>/ month</span></div>
+        <ul class="plan-features">
+          <li>Goals pre-live alerts</li>
+          <li>Verified performance data</li>
+          <li>Daily summary</li>
+          <li class="missing">Corner bot alerts</li>
+          <li class="missing">Personal tips</li>
+        </ul>
+        <a href="https://t.me/great_ziii" target="_blank" class="plan-btn">Get Access</a>
+      </div>
+
+      <!-- Combined Bot -->
+      <div class="plan-card">
+        <div class="plan-icon">🤖</div>
+        <div class="plan-name">Combined Bot</div>
+        <div class="plan-price">€XX <span>/ month</span></div>
+        <ul class="plan-features">
+          <li>ZI Corner Pro bot alerts</li>
+          <li>Goals pre-live alerts</li>
+          <li>Full performance dashboard</li>
+          <li>Daily summary</li>
+          <li class="missing">Personal tips</li>
+        </ul>
+        <a href="https://t.me/great_ziii" target="_blank" class="plan-btn">Get Access</a>
+      </div>
+
+      <!-- Elite Pack -->
+      <div class="plan-card featured">
+        <div class="plan-icon">👑</div>
+        <div class="plan-name">Elite Pack</div>
+        <div class="plan-price">€XX <span>/ month</span></div>
+        <ul class="plan-features">
+          <li>ZI Corner Pro bot alerts</li>
+          <li>Goals pre-live alerts</li>
+          <li>Full performance dashboard</li>
+          <li>Daily summary</li>
+          <li>Personal tips — live stream analysis</li>
+          <li>Direct access to the creator</li>
+        </ul>
+        <a href="https://t.me/great_ziii" target="_blank" class="plan-btn featured-btn">Get Elite Access</a>
+      </div>
+
+    </div>
+
+    <div class="skrill-note">
+      💳 Payment via <strong>Skrill</strong> — contact us on Telegram to subscribe. Secure and instant.
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">Get in Touch</h2>
+    <div class="gold-line"></div>
+    <div class="contact-wrap">
+      <div>
+        <h3 style="font-family:'Cinzel',serif;font-size:1.2rem;color:var(--gold-l);margin-bottom:1rem">Any questions?</h3>
+        <p style="font-size:13px;color:var(--white2);line-height:1.8;margin-bottom:1.5rem">Whether you want to know more about the system, discuss which plan fits you best, or simply start your subscription — reach out directly on Telegram. We respond quickly.</p>
+        <a href="https://t.me/great_ziii" target="_blank" class="btn-primary" style="display:inline-block">📲 Message on Telegram</a>
+      </div>
+      <div class="contact-form">
+        <input class="form-input" type="text" placeholder="Your name" id="cf-name">
+        <input class="form-input" type="email" placeholder="Your email (optional)" id="cf-email">
+        <select class="form-select" id="cf-plan">
+          <option value="">Interested in which plan?</option>
+          <option>Corners Only</option>
+          <option>Goals Only</option>
+          <option>Combined Bot</option>
+          <option>Elite Pack</option>
+          <option>Just have a question</option>
+        </select>
+        <textarea class="form-input" rows="4" placeholder="Your message..." id="cf-msg" style="resize:none"></textarea>
+        <a href="#" class="btn-primary" onclick="sendToTelegram(); return false;">Send Message →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+function sendToTelegram() {
+  var name = document.getElementById('cf-name').value || 'No name';
+  var email = document.getElementById('cf-email').value || 'No email';
+  var plan = document.getElementById('cf-plan').value || 'Not specified';
+  var msg = document.getElementById('cf-msg').value || 'No message';
+  var text = 'Hi! I came from your website.%0A%0AName: ' + encodeURIComponent(name) + '%0AEmail: ' + encodeURIComponent(email) + '%0APlan: ' + encodeURIComponent(plan) + '%0AMessage: ' + encodeURIComponent(msg);
+  window.open('https://t.me/great_ziii?text=' + text, '_blank');
+}
+</script>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-glow"></div>
+  <div class="section-label">Get Access</div>
+  <h2 class="cta-title">The edge is real.<br>The data proves it.</h2>
+  <p class="cta-sub">Surgical alerts. Verified performance. Real-time intelligence that operates while you sleep.</p>
+  <div class="cta-btns">
+    <a href="dashboard.html" class="btn-primary">View Full Dashboard</a>
+    <a href="whitepaper.pdf" target="_blank" class="btn-secondary">⬇ Download Whitepaper</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">ZI CORNER PRO</div>
+  <div class="footer-sub">Strategy Elite · Real-Time Intelligence · Verified Performance</div>
+  <p class="footer-disc">ZI Corner Pro is a real-time football pressure analysis system. All results are calculated automatically based on commonly observed market parameters. Market entry decisions, stake sizing, and bet placement are the sole responsibility of the user. ZI Corner Pro provides informational alerts only and does not constitute financial or betting advice. Past performance does not guarantee future results.</p>
+</footer>
+
+<script>
+async function loadLiveStats() {
+  try {
+    var res = await fetch('historico.json?t=' + Date.now());
+    if (!res.ok) return;
+    var raw = await res.json();
+    var all = [];
+    Object.keys(raw).forEach(function(d) {
+      raw[d].forEach(function(e) { all.push(e); });
+    });
+    if (!all.length) return;
+    var wins = all.filter(function(e){ return e.resultado==='WIN'; }).length;
+    var decididos = all.filter(function(e){ return e.resultado==='WIN' || e.resultado==='LOSS'; }).length;
+    var rate = decididos > 0 ? Math.round(wins/decididos*1000)/10 : 0;
+    var cantosArr = all.map(function(e){ return e.cantos_apos_alerta; }).filter(function(x){ return x!=null; });
+    var medC = cantosArr.length ? Math.round(cantosArr.reduce(function(a,b){return a+b;},0)/cantosArr.length*10)/10 : 0;
+    var scW = all.filter(function(e){ return e.resultado==='WIN'; }).map(function(e){ return e.estrelas; });
+    var avgW = scW.length ? Math.round(scW.reduce(function(a,b){return a+b;},0)/scW.length*10)/10 : 0;
+    document.getElementById('ls-total').textContent = all.length;
+    document.getElementById('ls-rate').textContent = rate + '%';
+    document.getElementById('ls-cantos').textContent = '+' + medC;
+    document.getElementById('ls-score').textContent = avgW || '—';
+    document.getElementById('ls-updated').textContent = 'Live data · Updated ' + new Date().toLocaleTimeString('en-GB');
+  } catch(e) {
+    document.getElementById('ls-updated').textContent = 'Performance data loading...';
+  }
+}
+loadLiveStats();
+setInterval(loadLiveStats, 60000);
+</script>
+</body>
+</html>
